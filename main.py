@@ -40,12 +40,12 @@ async def on_message(message):
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
 
     if "alo" in message_content:
-        await message.delete(message)
+        # await message.delete(message)
         await message.channel.send("@everyone alô alô. chơi game nào")
     if message_content == "game":
         await message.channel.send("game nào")
     if message_content.startswith("chửi"):
-        await message.channel.send(" ".join(message.content.split()[1:-1]).capitalize())
+        await message.channel.send(" ".join(message.content.split()[1:]).capitalize())
     if message_content in ("dit me quan", "dm quan", "địt mẹ quân", "đm quân"):
         await message.channel.send("Ây ây. Điều quan trọng phải nhắc 3 lần chứ!")
         await message.channel.send(message)
