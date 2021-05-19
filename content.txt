@@ -1,0 +1,16 @@
+cc,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+đm,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+dm,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+loz,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+lồn,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+ditmequan,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+con cac,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+con cặc,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+địt mẹ,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+dit me,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+du me,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+đụ mẹ,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+djt me may,0,0,Chửi thề con cặc. Đụ mẹ nói chuyện zô zăn hóa,,1
+trần dần,1,0,,tran_dan.jpg,0
+triệu hồi trần dần,0,0,,tran_dan.png,0
+lô,0,0,lô cc,,0

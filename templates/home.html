@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Sủa Config</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="content-container col-md-8">
+                <h1 class="title text-center">Auto Sủa</h1>
+                <form class="form-vip-pro" action="/" method="POST">
+                    <div class="form-group">
+                        <select name="word-type" class="form-control" >
+                            <option value="0">Trong tin nhắn có chứa từ</option>
+                            <option value="1">Tin nhắn chính xác bằng</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input name="content" class="form-control" placeholder="Nhập từ vào đây" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reply-type">Chọn kiểu xử lý:</label>
+                        <select name="reply-type" class="form-control">
+                            <option value="0">Trả lời bằng tin nhắn</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reply">Nội dung bot trả lời:</label>
+                        <textarea class="form-control" name="reply-content" id="" cols="30" rows="10" placeholder="Nhập nội dung bot sẽ trả lời"></textarea>
+                    </div>
+
+                    <div class="form-group custom-file">
+                        <input name="image" type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Thêm hình ảnh(< 1MB)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Nhắc mọi người
+                        </label>
+                    </div>
+
+                
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Nhắc thằng gửi
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Lưu</button>
+                </form>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+    </div>
+</body>
+    <script>
+        $(() => {
+
+            $(".custom-file-input").on("change", () => {
+                const fileName = $(".custom-file-input").val().split("\\").pop();
+                $(".custom-file-input").siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+
+            $('.form-vip-pro').submit(e => {
+                e.preventDefault();
+                
+                // const data = new FormData();
+                const form = $('.form-vip-pro');
+                // var form_data = form.serializeArray();
+                // $.each(form_data, function (key, input) {
+                //     data.append(input.name, input.value);
+                // });
+
+                // var fileData = $('input[name="image"]')[0].files[0];
+                // data.append("image", fileData);
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:5000',
+                    // processData: false,
+                    data: form.serialize(),
+                    success: res => {
+                        if (res === 'OK') {
+                            $('.content-container').append(`
+                            <div class="alert alert-success">
+                                <strong>Yoh!</strong> Đã thêm thành công.
+                            </div>`)
+                            }
+                            // Clear input
+                            $(".form-vip-pro").trigger('reset');
+                        },
+                    error: err => {
+                        console.log(err);
+                    }
+                })
+            });
+        })
+    </script>
+</html>
