@@ -88,12 +88,12 @@ async def on_message(message):
                         await message.channel.send(row['reply_content'])
                     if row['image'] != '':
                         await message.channel.send(file=discord.File(f'images/{row["image"]}'))
-                else:
-                    if row['content'] in message_content:
-                        if row['reply_content'] != '':
-                            await message.channel.send(row['reply_content'])
-                        if row['image'] != '':
-                            await message.channel.send(file=discord.File(f'images/{row["image"]}'))
+            else:
+                if row['content'] in message_content:
+                    if row['reply_content'] != '':
+                        await message.channel.send(row['reply_content'])
+                    if row['image'] != '':
+                        await message.channel.send(file=discord.File(f'images/{row["image"]}'))
 
 
 
