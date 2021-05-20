@@ -34,6 +34,9 @@ async def on_message(message):
         for attachment in message.attachments:
             if any(attachment.filename.lower().endswith(image) for image in image_types):
                 await attachment.save(f'meme/{time()}.jpeg')
+                num = random.randint(0, 10)
+                if num < 3:
+                    await message.channel.send(file=discord.File('images/kamui.jpeg'))
                 return
     
     message_content = message.content.lower()
