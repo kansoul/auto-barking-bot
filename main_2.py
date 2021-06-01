@@ -38,7 +38,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    
+    global images
+
+
     if message.author == client.user:
         return
 
@@ -62,7 +64,6 @@ async def on_message(message):
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
 
     if message_content == 'meme':
-
         if images == []:
             images = os.listdir('meme')
         
