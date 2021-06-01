@@ -63,7 +63,7 @@ async def on_message(message):
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
 
     if message_content == 'meme':
-        global images
+        # global images
 
         if images == []:
             images = os.listdir('meme')
