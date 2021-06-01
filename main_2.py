@@ -43,7 +43,6 @@ async def on_message(message):
         return
 
     if message.channel.name == 'meme':
-        global images
         for attachment in message.attachments:
             if any(attachment.filename.lower().endswith(image) for image in image_types):
                 filename = f'meme/{time()}.jpeg'
@@ -63,7 +62,6 @@ async def on_message(message):
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
 
     if message_content == 'meme':
-        # global images
 
         if images == []:
             images = os.listdir('meme')
@@ -84,7 +82,11 @@ async def on_message(message):
 
     # Bad word
     if message_content in bad_word:
-        await message.channel.send(random.choice(bad_word_response))
+        temp = random.choice(bad_word_response)
+        if type(temp) == 'str':
+            await message.channel.send(temp)
+        else:
+            await message.channel.send(file=temp)
 
     
 
