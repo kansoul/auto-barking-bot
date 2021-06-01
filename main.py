@@ -8,6 +8,7 @@ import random
 client = discord.Client()
 
 image_types = ["png", "jpeg", "gif", "jpg"]
+images = os.listdir('meme')
 
 def parse_row(row):
     return {
@@ -27,13 +28,18 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
+    
+
     if message.author == client.user:
         return
 
     if message.channel.name == 'meme':
+        global images
         for attachment in message.attachments:
             if any(attachment.filename.lower().endswith(image) for image in image_types):
-                await attachment.save(f'meme/{time()}.jpeg')
+                filename = f'meme/{time()}.jpeg'
+                await attachment.save(filename)
+                images.append(filename)
                 num = random.randint(0, 10)
                 if num < 3:
                     await message.channel.send(file=discord.File('images/kamui.jpeg'))
@@ -48,8 +54,14 @@ async def on_message(message):
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
 
     if message_content == 'meme':
-        images = os.listdir('meme')
-        image = random.choice(images)
+        global images
+
+        if images == []:
+            images = os.listdir('meme')
+        
+        random.shuffle(images)
+        image = images.pop()
+        
         await message.channel.send(file=discord.File(f'meme/{image}'))
 
     if words[0] == '!show' and len(words) > 1:
@@ -80,20 +92,26 @@ async def on_message(message):
             if row['condition'] == 1 and row['content'] == message_content:
                 if row['reply_content'] != '':
                     await message.channel.send(row['reply_content'])
+                    return
                 if row['image'] != '':
                     await message.channel.send(file=discord.File(f'images/{row["image"]}'))
+                    return
             elif row['condition'] == 0:
                 if row['content'].count(' ') == 0 and row['content'] in words:
                     if row['reply_content'] != '':
                         await message.channel.send(row['reply_content'])
+                        return
                     if row['image'] != '':
                         await message.channel.send(file=discord.File(f'images/{row["image"]}'))
+                        return
             else:
                 if row['content'] in message_content:
                     if row['reply_content'] != '':
                         await message.channel.send(row['reply_content'])
+                        return
                     if row['image'] != '':
                         await message.channel.send(file=discord.File(f'images/{row["image"]}'))
+                        return
 
 
 
