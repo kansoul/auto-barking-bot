@@ -17,8 +17,8 @@ bad_word_response = [
     'chửi con cặc. mày nói chuyện gì mà tục tĩu quá vậy mày',
     'thằng zô zăn hóa. con chó của cộng sản',
     'chửi thề con cặc. đụ mẹ nói chuyện zô zăn hóa',
-    discord.File('images/tran_dan.jpg'),
-    discord.File('trandan.mp4'),
+    '|images/tran_dan.jpg',
+    '|trandan.mp4',
 ]
 
 def parse_row(row):
@@ -84,10 +84,10 @@ async def on_message(message):
     # Bad word
     if message_content in bad_word:
         temp = random.choice(bad_word_response)
-        if type(temp) == 'str':
-            await message.channel.send(temp)
+        if temp[0] == '|':
+            await message.channel.send(file=discord.File(temp[1:]))
         else:
-            await message.channel.send(file=temp)
+            await message.channel.send(temp)
 
     
 
