@@ -2,10 +2,11 @@ import discord
 from discord import Embed
 import requests
 from datetime import datetime
-import time
+import json
 import os
 from dotenv import load_dotenv
 import random
+import matplotlib.pyplot as plt
 
 client = discord.Client()
 
@@ -62,7 +63,8 @@ async def on_message(message):
         embed.add_field(name='Tử vong', value=data['deceased'], inline=True)
         embed.add_field(name='Phục hồi', value=f'{data["recovered"]:,}', inline=True)
 
-        last_updated = datetime.strptime(data['lastUpdatedAtSource'], '%Y-%m-%dT%H:%M:%S.%fZ').timestamp()
+        dt = datetime.strptime(data['lastUpdatedAtSource'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        last_updated = dt.timestamp()
         now = datetime.now().timestamp()
         offset = datetime.fromtimestamp(now) - datetime.utcfromtimestamp(now)
         diff = now - last_updated - offset.total_seconds()
@@ -78,6 +80,37 @@ async def on_message(message):
 
         embed.add_field(name='Cập nhật gần nhất', value=vl)
         await message.channel.send(embed=embed)
+
+        # Create charts
+        # check if image exist first
+        filename = f'{dt.strftime("%Y-%m-%dT%H:%M")}.png'
+        path = f'covid_charts/{filename}'
+        if os.path.exists(path):
+            await message.channel.send(file=discord.File(path))
+        else:
+            with open('provinces_code.json') as f:
+                json_data = json.load(f)
+
+            provinces, infecteds, deaths, recovereds = [], [], [], []
+
+            for province in data['detail'][:5]:
+                death, recovered, code, infected = province.values()
+                provinces.append(json_data.get(code, '?'))
+                infecteds.append(infected)
+                # recovereds.append(recovered)
+                # deaths.append(death)
+
+            plt.bar(provinces, infecteds, color=(1, .5, .5, 0.9))
+            plt.title('Top 5 tỉnh/thành phố có nhiều ca mắc nhất')
+            plt.xlabel('Tỉnh/Thành phố')
+            plt.ylabel('Số ca mắc')
+            plt.savefig(path)
+            plt.close()
+
+            await message.channel.send(file=discord.File(path))
+
+
+        
         
 
     if message_content == 'dlpl':
