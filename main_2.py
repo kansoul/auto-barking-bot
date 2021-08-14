@@ -1,7 +1,8 @@
 import discord
-from discord import channel
+from discord import Embed
 import requests
-from time import time
+from datetime import datetime
+import time
 import os
 from dotenv import load_dotenv
 import random
@@ -20,6 +21,8 @@ bad_word_response = [
     '|images/tran_dan.jpg',
     '|trandan.mp4',
 ]
+
+API_URL = 'https://api.apify.com/v2/key-value-stores/ZsOpZgeg7dFS1rgfM/records/LATEST'
 
 def parse_row(row):
     return {
@@ -48,6 +51,34 @@ async def on_message(message):
     words = message_content.split()
 
     # Special command
+    if message_content in ('covid', 'covid-19', 'covid 19', 'corona'):
+        res = requests.get(API_URL)
+        data = res.json()
+        embed = Embed()
+        embed.set_author(name='Bộ Y Tế', url=data['sourceUrl'], icon_url='https://vitratecom.vn/wp-content/uploads/2019/08/2018-08-13-011414.6356512018-01-11-110703.688533boyte.png')
+        embed.set_thumbnail(url='https://www.uia.no/var/uia/storage/images/media/images/2020-nyhetsbilder-2-hoest/korona-viruset-2871-cdc-alissa-eckert-ms_modifisert-970/1945937-1-nor-NO/korona-viruset-2871-cdc-alissa-eckert-ms_modifisert-970_fullwidth.jpg')
+        embed.title = 'Tình hình Covid tại Việt Nam'
+        embed.add_field(name='Số ca', value=f'{data["infected"]:,}', inline=True)
+        embed.add_field(name='Tử vong', value=data['deceased'], inline=True)
+        embed.add_field(name='Phục hồi', value=f'{data["recovered"]:,}', inline=True)
+
+        last_updated = datetime.strptime(data['lastUpdatedAtSource'], '%Y-%m-%dT%H:%M:%S.%fZ').timestamp()
+        now = datetime.now().timestamp()
+        offset = datetime.fromtimestamp(now) - datetime.utcfromtimestamp(now)
+        diff = now - last_updated - offset.total_seconds()
+
+        vl = ''
+        
+        if diff >= 3600:
+            vl = f'{int(diff//3600)} giờ trước'
+        elif diff >= 60:
+            vl = f'{int(diff//60)} phút trước'
+        else:
+            vl = 'vài giây trước'
+
+        embed.add_field(name='Cập nhật gần nhất', value=vl)
+        await message.channel.send(embed=embed)
+        
 
     if message_content == 'dlpl':
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
