@@ -62,10 +62,12 @@ async def on_message(message):
             await message.channel.send("nghiện")
 
     if 'lô' in words or "alo" in words or 'alô' in words:
-        messages = ['@everyone alô alô. chơi game nào',\
-                    'lô cc', 'lại tính rủ chơi gêm chứ gì. t hiểu tụi mày quá', \
-                        'lô cc gì mà lô']
-        await message.channel.send(random.choice(messages))
+        messages = [['@everyone alô alô. chơi game nào'],\
+                    ['lô cc'], ['lại tính rủ chơi gêm chứ gì. t hiểu tụi mày quá', 'để t rủ cho', '@everyone gem nào các giáo sư'], \
+                        ['lô cc gì mà lô']]
+        l = random.choice(messages)
+        for m in l:
+            await message.channel.send(m)
 
     # Bad word
     if message_content in bad_word:
