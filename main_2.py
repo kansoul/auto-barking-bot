@@ -43,17 +43,6 @@ async def on_message(message):
 
     if message.author == client.user:
         return
-
-    if message.channel.name == 'meme':
-        for attachment in message.attachments:
-            if any(attachment.filename.lower().endswith(image) for image in image_types):
-                filename = f'meme/{time()}.jpeg'
-                await attachment.save(filename)
-                images.append(filename)
-                num = random.randint(0, 10)
-                if num < 1:
-                    await message.channel.send(file=discord.File('images/kamui.jpeg'))
-                return
     
     message_content = message.content.lower()
     words = message_content.split()
@@ -64,22 +53,19 @@ async def on_message(message):
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
 
     if message_content == 'meme':
-        if images == []:
-            images = os.listdir('meme')
-        
-        random.shuffle(images)
-        image = images.pop()
-        
-        await message.channel.send(file=discord.File(f'meme/{image}'))
+        await message.channel.send('Không lưu meme nữa. Nặng quá!')
     
     if message_content == "game":
-        await message.channel.send("game nào")
+        if random.randint(1, 10) == 0:
+            await message.channel.send("game nào")
+        else:
+            await message.channel.send("nghiện")
 
     if 'lô' in words or "alo" in words or 'alô' in words:
-        if random.randint(1, 10) % 2 == 0:
-            await message.channel.send("@everyone alô alô. chơi game nào")
-        else:
-            await message.channel.send("lô cc")
+        messages = ['@everyone alô alô. chơi game nào',\
+                    'lô cc', 'lại tính rủ chơi gêm chứ gì. t hiểu tụi mày quá', \
+                        'lô cc gì mà lô']
+        await message.channel.send(random.choice(messages))
 
     # Bad word
     if message_content in bad_word:
