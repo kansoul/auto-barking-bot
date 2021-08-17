@@ -110,8 +110,10 @@ async def on_message(message):
             await message.channel.send(file=discord.File(path))
 
 
-        
-        
+    if message_content == 'bot ngu':
+        messages = ['ngu cc. vào mà làm bot', 'vâng. bạn thông minh nhất']
+        await message.channel.send(random.choice(messages))
+    
 
     if message_content == 'dlpl':
         await message.channel.send("!play https://www.youtube.com/playlist?list=PL8ZD0D4lXAriRazkWrqUo_3m0XiyqavuA")
@@ -120,7 +122,7 @@ async def on_message(message):
         await message.channel.send('Không lưu meme nữa. Nặng quá!')
     
     if message_content == "game":
-        if random.randint(1, 10) == 0:
+        if random.randint(1, 10) % 2 == 0:
             await message.channel.send("game nào")
         else:
             await message.channel.send("nghiện")
