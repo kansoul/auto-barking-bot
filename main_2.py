@@ -25,15 +25,11 @@ bad_word_response = [
 
 API_URL = 'https://api.apify.com/v2/key-value-stores/ZsOpZgeg7dFS1rgfM/records/LATEST'
 
-def parse_row(row):
-    return {
-        'content': row[0],
-        'condition': int(row[1]),
-        'reply_type': int(row[2]),
-        'reply_content': row[3],
-        'image': row[4],
-        'mention_everyone': int(row[5])
-    }
+id_dict = {
+    '835374442577526785': 'me',
+    '682229605092163584': ['ĐM Quân'],
+    '452524506578288681': ['Sủa cc j vậy thằng fake']
+}
 
 @client.event
 async def on_ready():
@@ -44,9 +40,10 @@ async def on_ready():
 async def on_message(message):
     global images
 
-
     if message.author == client.user:
         return
+
+    author = message.author.id
     
     message_content = message.content.lower()
     words = message_content.split()
@@ -122,7 +119,7 @@ async def on_message(message):
         await message.channel.send('Không lưu meme nữa. Nặng quá!')
     
     if message_content == "game":
-        if random.randint(1, 10) % 2 == 0:
+        if random.randint(1, 10) % 2 == 0 or id_dict[author]:
             await message.channel.send("game nào")
         else:
             await message.channel.send("nghiện")
@@ -142,6 +139,14 @@ async def on_message(message):
             await message.channel.send(file=discord.File(temp[1:]))
         else:
             await message.channel.send(temp)
+
+    if author in id_dict:
+        if id_dict[author] != 'me':
+            await message.channel.send(random.choice(id_dict[author]))
+            return
+
+    if random.randint(1, 10) == 5:
+        await message.channel.send('😏')
 
     
 
