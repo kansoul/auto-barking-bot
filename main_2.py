@@ -28,7 +28,7 @@ API_URL = 'https://api.apify.com/v2/key-value-stores/ZsOpZgeg7dFS1rgfM/records/L
 id_dict = {
     '835374442577526785': 'me',
     '682229605092163584': ['ĐM Quân'],
-    '452524506578288681': ['Sủa cc j vậy thằng fake']
+    '452524506578288681': ['Sủa cc j vậy thằng fake'],
     '486145075706069004': ['Đức Anh Dz']
 }
 
