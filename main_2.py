@@ -27,7 +27,7 @@ API_URL = 'https://api.apify.com/v2/key-value-stores/ZsOpZgeg7dFS1rgfM/records/L
 
 id_dict = {
     '835374442577526785': 'me',
-    '682229605092163584': ['ĐM Quân'],
+    '682229605092163584': ['Ditmequan'],
     '452524506578288681': ['Sủa cc j vậy thằng fake'],
     '486145075706069004': ['Đức Anh Dz']
 }
@@ -149,7 +149,9 @@ async def on_message(message):
 
     if random.randint(1, 10) == 5:
         await message.channel.send('😏')
-
+        
+    if message_content == '(:' or ':)':
+        await message.channel.send('Bớt thả icon đê!!!!')
 
 load_dotenv()
 client.run(os.getenv("TOKEN"))
