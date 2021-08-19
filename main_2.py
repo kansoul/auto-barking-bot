@@ -43,7 +43,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    author = message.author.id
+    author = str(message.author.id)
     
     message_content = message.content.lower()
     words = message_content.split()
@@ -107,8 +107,8 @@ async def on_message(message):
             await message.channel.send(file=discord.File(path))
 
 
-    if message_content == 'bot ngu':
-        messages = ['ngu cc. vào mà làm bot', 'vâng. bạn thông minh nhất']
+    if message_content == 'bot ngu' or message_content.startswith('bot ngu'):
+        messages = ['ngu cc. vào mà làm bot', 'vâng. bạn thông minh nhất', 'bạn là nhất rồi', 'sủa']
         await message.channel.send(random.choice(messages))
     
 
@@ -127,7 +127,7 @@ async def on_message(message):
     if 'lô' in words or "alo" in words or 'alô' in words:
         messages = [['@everyone alô alô. chơi game nào'],\
                     ['lô cc'], ['lại tính rủ chơi gêm chứ gì. t hiểu tụi mày quá', 'để t rủ cho', '@everyone gem nào các giáo sư'], \
-                        ['lô cc gì mà lô']]
+                        ['lô cc gì mà lô'], ['?']]
         l = random.choice(messages)
         for m in l:
             await message.channel.send(m)
@@ -142,14 +142,12 @@ async def on_message(message):
 
     if author in id_dict:
         if id_dict[author] != 'me':
-            await message.channel.send(random.choice(id_dict[author]))
-            return
+            if random.randint(1, 5):
+                await message.channel.send(random.choice(id_dict[author]))
+                return
 
     if random.randint(1, 10) == 5:
         await message.channel.send('😏')
-
-    
-
 
 
 load_dotenv()
