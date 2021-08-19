@@ -142,7 +142,7 @@ async def on_message(message):
 
     if author in id_dict:
         if id_dict[author] != 'me':
-            if random.randint(1, 5):
+            if random.randint(1, 5) == 1:
                 await message.channel.send(random.choice(id_dict[author]))
                 return
 
