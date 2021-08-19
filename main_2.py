@@ -132,6 +132,9 @@ async def on_message(message):
         l = random.choice(messages)
         for m in l:
             await message.channel.send(m)
+            
+     if message_content == '(:':
+        await message.channel.send('Bớt thả icon đê!!!!')
 
     # Bad word
     if message_content in bad_word:
@@ -150,8 +153,7 @@ async def on_message(message):
     if random.randint(1, 10) == 5:
         await message.channel.send('😏')
         
-    if message_content == '(:' or ':)':
-        await message.channel.send('Bớt thả icon đê!!!!')
+
 
 load_dotenv()
 client.run(os.getenv("TOKEN"))
