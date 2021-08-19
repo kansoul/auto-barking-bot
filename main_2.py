@@ -13,7 +13,7 @@ client = discord.Client()
 image_types = ["png", "jpeg", "gif", "jpg"]
 images = os.listdir('meme')
 
-bad_word = ['cc', 'đm', 'dm', 'loz', 'lồn', 'ditmequan', 'cl']
+bad_word = ['cc', 'đm', 'dm', 'loz', 'lồn', 'ditme', 'cl', 'cẹk]
 
 bad_word_response = [
     'chửi con cặc. mày nói chuyện gì mà tục tĩu quá vậy mày',
@@ -134,8 +134,13 @@ async def on_message(message):
             await message.channel.send(m)
             
     if message_content == '(:':
-        if random.randint(0, 5):
             await message.channel.send('Bớt thả icon đê!!!!')
+            
+    if message_content == ':))':
+            await message.channel.send('Quân ngu')
+            
+      if message_content == 'quân':
+        await message.channel.send('đầu bùi')       
 
     # Bad word
     if message_content in bad_word:
