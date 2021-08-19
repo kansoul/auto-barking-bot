@@ -133,8 +133,9 @@ async def on_message(message):
         for m in l:
             await message.channel.send(m)
             
-     if message_content == '(:':
-        await message.channel.send('Bớt thả icon đê!!!!')
+    if message_content == '(:':
+        if random.randint(0, 5):
+            await message.channel.send('Bớt thả icon đê!!!!')
 
     # Bad word
     if message_content in bad_word:
@@ -150,7 +151,7 @@ async def on_message(message):
                 await message.channel.send(random.choice(id_dict[author]))
                 return
 
-    if random.randint(1, 10) == 5:
+    if random.randint(1, 10) == 10:
         await message.channel.send('😏')
         
 
