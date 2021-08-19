@@ -13,7 +13,7 @@ client = discord.Client()
 image_types = ["png", "jpeg", "gif", "jpg"]
 images = os.listdir('meme')
 
-bad_word = ['cc', 'đm', 'dm', 'loz', 'lồn', 'ditme', 'cl', 'cẹk]
+bad_word = ['cc', 'đm', 'dm', 'loz', 'lồn', 'ditme', 'cl', 'cẹk']
 
 bad_word_response = [
     'chửi con cặc. mày nói chuyện gì mà tục tĩu quá vậy mày',
