@@ -141,6 +141,21 @@ async def on_message(message):
             
     if message_content == 'quân':
         await message.channel.send('đầu bùi')
+        
+    if message_content == 'chửi':
+        if random.randint(1, 10) % 2 == 0 
+            await message.channel.send('Ai chửi lộn vậy cho tui tham gia với cho vui đê!!!')
+        else:
+            await message.channel.send("thích thì chửi k thích thì chửi")
+            
+     if message_content == 'bot chửi':
+        if random.randint(1, 10) % 2 == 0 
+            await message.channel.send("Tao đã biết chửi ai đâu")
+             else:
+            await message.channel.send("thích thì chửi k thích thì chửi")
+            
+              if message_content == 'xạo':
+            await message.channel.send('Xạo l k có gì zui chúng ta k nên xạo l')
         return
 
     # Bad word
