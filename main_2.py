@@ -9,6 +9,7 @@ import random
 import matplotlib.pyplot as plt
 
 client = discord.Client()
+WEBHOOK_URL = 'https://discord.com/api/webhooks/878121946108297226/eedap7zrzAYOOJ9vC_oeC03sybWmebZGF0LqxJipQ93xWT5Z6wD5rKqyuN-Eg6v_-dKQ'
 
 image_types = ["png", "jpeg", "gif", "jpg"]
 images = os.listdir('meme')
@@ -34,7 +35,15 @@ id_dict = {
 
 @client.event
 async def on_ready():
-    print("We have logged in as {0.user}".format(client))
+    with open('.version') as f:
+        content = json.load(f)
+    payload = json.dumps({
+        'content': f'Starting the bot...'
+    })
+    res = requests.post(url=WEBHOOK_URL, headers={
+        'Content-Type': 'application/json'
+    }, data=payload)
+    print(res.text)
 
 
 @client.event
@@ -132,31 +141,12 @@ async def on_message(message):
         l = random.choice(messages)
         for m in l:
             await message.channel.send(m)
-            
-    if message_content == '(:':
-            await message.channel.send('Bớt thả icon đê!!!!')
-            
-    if message_content == ':))':
-            await message.channel.send('Quân ngu')
-            
-    if message_content == 'quân':
-        await message.channel.send('đầu bùi')
-        
-    if message_content == 'chửi':
-        if random.randint(1, 10) % 2 == 0 
-            await message.channel.send('Ai chửi lộn vậy cho tui tham gia với cho vui đê!!!')
+
+    if message_content == 'bot chửi':
+        if random.randint(1, 10) % 2 == 0:
+            await message.channel.send("Tao đã biết chửi ai đâu")   
         else:
             await message.channel.send("thích thì chửi k thích thì chửi")
-            
-     if message_content == 'bot chửi':
-        if random.randint(1, 10) % 2 == 0 
-            await message.channel.send("Tao đã biết chửi ai đâu")
-             else:
-            await message.channel.send("thích thì chửi k thích thì chửi")
-            
-              if message_content == 'xạo':
-            await message.channel.send('Xạo l k có gì zui chúng ta k nên xạo l')
-        return
 
     # Bad word
     if message_content in bad_word:
@@ -168,7 +158,7 @@ async def on_message(message):
 
     if author in id_dict:
         if id_dict[author] != 'me':
-            if random.randint(1, 5) == 1:
+            if random.randint(1, 10) == 1:
                 await message.channel.send(random.choice(id_dict[author]))
                 return
 
