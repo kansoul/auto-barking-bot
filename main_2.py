@@ -156,6 +156,9 @@ async def on_message(message):
             
               if message_content == 'xạo':
             await message.channel.send('Xạo l k có gì zui chúng ta k nên xạo l')
+            
+             if message_content == 'bot':
+        await message.channel.send('Đứa nào kêu tên bố mày')
         return
 
     # Bad word
