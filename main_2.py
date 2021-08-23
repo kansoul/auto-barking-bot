@@ -30,6 +30,7 @@ id_dict = {
     '682229605092163584': ['Ditmequan'],
     '452524506578288681': ['Sủa cc j vậy thằng fake'],
     '486145075706069004': ['Đức Anh Dz']
+    '393356909979238401': ['Bớt thả icon đê']
 }
 
 @client.event
@@ -132,9 +133,7 @@ async def on_message(message):
         l = random.choice(messages)
         for m in l:
             await message.channel.send(m)
-            
-    if message_content == '(:':
-            await message.channel.send('Bớt thả icon đê!!!!')
+          
             
     if message_content == ':))':
             await message.channel.send('Quân ngu')
