@@ -128,6 +128,9 @@ async def on_message(message):
 
     if message_content == 'meme':
         await message.channel.send('Không lưu meme nữa. Nặng quá!')
+        
+    if message_content == 'Đầu lòng hai ả tố nga':
+        await message.channel.send('Thúy Kiều là chị, em là Thúy Vân')
     
     if message_content == "game":
         if random.randint(1, 10) % 2 == 0 or id_dict.get(author, '') == 'me':
