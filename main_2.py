@@ -31,6 +31,7 @@ id_dict = {
     '682229605092163584': ['Ditmequan'],
     '452524506578288681': ['Sủa cc j vậy thằng fake'],
     '486145075706069004': ['Đức Anh Dz']
+    '393356909979238401': ['Bớt thả icon đê']
 }
 
 @client.event
@@ -141,12 +142,6 @@ async def on_message(message):
         l = random.choice(messages)
         for m in l:
             await message.channel.send(m)
-
-    if message_content == 'bot chửi':
-        if random.randint(1, 10) % 2 == 0:
-            await message.channel.send("Tao đã biết chửi ai đâu")   
-        else:
-            await message.channel.send("thích thì chửi k thích thì chửi")
 
     # Bad word
     if message_content in bad_word:
